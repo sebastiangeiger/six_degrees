@@ -33,4 +33,8 @@ class User
     # as a first degree connection will be put into a second_degree_connection array 
   end 
 
+  def to_s
+    "User @#{user_name}"
+  end
+
 end 
