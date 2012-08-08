@@ -1,4 +1,4 @@
-require 'user'
+require_relative 'user'
 
 
 #Go through every line of of the txt file, store user as hash key and tweet(s) as values in a hash
