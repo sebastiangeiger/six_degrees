@@ -1,23 +1,16 @@
-require 'rubygems'
-require 'awesome_print'
+
 
 
 class User
+  attr_accessor :username, :tweets, :first_degree, :second_degree
 
-  @@instance_collector = []
-
-  def initiliaze(user_name, tweets)
-    @@instance_collector << self
+  def initialize(user_name, tweets)
 
     @user_name = user_name
     @tweets = tweets
 
     @user_details = {}
   end 
-
-  def self.all_offspring #keeps track of how many classes of itself User has
-    @@instance_collector
-  end
 
   def user_name
   	@user_details[:user] = @user_name
@@ -27,10 +20,25 @@ class User
   	@user_details[:tweets] = @tweets
   end
 
+  def first_degree(another_user)
+    @first_degree_connections = []
+    #this method will compare the tweets from .self to another_user.tweets
+     if self.tweets #contain a tweet @ the another_user and the another_user's tweets contain a tweet @ self
+       @first_degree_connections << another_user.user_name 
+
+    #then store that user in an array called 
+  end 
+
+   def second_degree
+    #this method will compare .self's first_degree_connections to it's first degree connections 
+    #all the first_degree_connections of the other users that the current instance does not have 
+    # as a first degree connection will be put into a second_degree_connection array 
+  end 
+
 end 
 
 
-
+#compare each users tweets to the other and check to see if they are the same 
 
 
 
@@ -66,12 +74,18 @@ tweets.each do |line|
 end
 
 
-#break the hash key and value up, create a new User class and pass the key and value to them
 
+all_users = [] #create an array to hold all the instances of the User class to be used later 
+
+#break the hash key and value up, create a new User class and pass the key and value to them
 users.each do |key, value|
  user = User.new(key, value)
- puts user.user_name
+ all_users << user
+ #puts user.user_name # need to figure out how to print out the users in alpabetical order 
+ #puts user.tweets
 end 
 
-ap user.all_offspring
+puts all_users
+
+
 
